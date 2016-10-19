@@ -47,11 +47,11 @@ Advantages:
 * Composition
 * Immutability
 
-Basic operations: view, set, over (i.e. map (or modify))
+Basic operations: view, set, over
 
 ---
 
-## View (aka get)
+## View
 
 ```javascript
 const person = {
@@ -102,7 +102,7 @@ Returns a copy of the provided data with the property pointed to by the lens set
 
 ---
 
-## Over (aka modify / map)
+## Over
 
 ```javascript
 const person = {
