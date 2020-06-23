@@ -198,17 +198,13 @@ L.append, L.augument, L.chain, L.choose, L.choice, L.defaults ...
 ## Partial.lenses API
 
 Operations, "combinators", lenses, transforms and isomorphisms listed separately in documentation
-
-Operations: L.get, L.set, L.modify, L.remove, L.removeAll, L.collect
-
-Optics: 
+* Operations: L.get, L.set, L.modify, L.remove, L.removeAll, L.collect
+* Optics: 
   * Lenses: ['a', 'b'] (single focus)
   * Traversals: ['a', 'b', L.elems] (multiple focuses)
   * Isomorphisms (like lenses, but inversable)
-
-Combinators: L.compose, L.flat, L.lazy, L.query, L.ifElse, ...
-
-Transforms: L.transform, L.*Op
+* Combinators: L.compose, L.flat, L.lazy, L.query, L.ifElse, ...
+* Transforms: L.transform, L.*Op
 
 Shorthands:
 
