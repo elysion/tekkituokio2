@@ -182,15 +182,17 @@ Usage:
 
 ```javascript
 const L = require('partial.lenses')
-const P = L.default
 
-const lens = ['a', 'b', L.elems, ...]
+const lens = ['a', 'b']
 
 const data = {
   a: {
-    b: [...]
+    b: [1, 2, 3]
   }
 }
+
+L.get(lens, data)
+// [1, 2, 3]
 ```
 
 ---
