@@ -184,7 +184,7 @@ Usage:
 const L = require('partial.lenses')
 const P = L.default
 
-const lens = P('a', 'b', L.sequence, ...)
+const lens = ['a', 'b', L.elems, ...]
 
 const data = {
   a: {
