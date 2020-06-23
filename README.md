@@ -174,7 +174,7 @@ L.append, L.augument, L.chain, L.choose, L.choice, L.defaults ...
 * Shorthands:
 
 ```javascript
-L.compose(...) => P(...)
+L.compose(a, b, ...) => [a, b, ...]
 L.prop('...') => '...'
 ```
 
