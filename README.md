@@ -40,7 +40,10 @@ https://www.youtube.com/watch?v=m3svKOdZijA
 
 ## Lenses
 
-> Lenses, also known as functional references, are a powerful way of looking at, constructing, and using functions on complex data types.
+> Ramda: Lenses, also known as functional references, are a powerful way of looking at, constructing, and using functions on complex data types.
+
+> partial.lenses: Optics decouple the operation to perform on element(s) of a data structure from the details of selecting the element(s) and the details of maintaining data structure invariants.
+> In other words, a selection algorithm and data structure invariant maintenance can be expressed as a composition of optics and used with many different operations.
 
 Advantages:
 * Declarative
@@ -48,9 +51,6 @@ Advantages:
 * Immutability
 
 Basic operations: view, set, over
-
-> Optics decouple the operation to perform on element(s) of a data structure from the details of selecting the element(s) and the details of maintaining data structure invariants.
-> In other words, a selection algorithm and data structure invariant maintenance can be expressed as a composition of optics and used with many different operations.
 
 ---
 
