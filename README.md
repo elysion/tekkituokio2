@@ -74,7 +74,8 @@ const workPhoneLens = R.lensPath(['phone', 'work'])
 
 // operation(optic,         data)
 R.view      (workPhoneLens, person)
-
+// Equivalent to person.phone.work
+// Simple!
 
 Output:
 {
@@ -93,6 +94,8 @@ const workPhoneNumberLens = R.compose(workPhoneLens, R.lensProp('number'))
 
 // operation(optic,               ...  , data)
 R.set       (workPhoneNumberLens, '123', person)
+// Equivalent to R.evolve({phone: R.evolve({work: R.assoc('number', '123')})})
+// Complex! The selection of focus cannot be shared between get and set!
 
 Output:
 {
@@ -111,6 +114,8 @@ Returns a copy of the provided data with the property pointed to by the lens set
 ---
 
 ## Over
+
+R.over is a modify operation that operates on the focus of the given lens.
 
 ```javascript
 const person = {
