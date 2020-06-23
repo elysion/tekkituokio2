@@ -49,6 +49,9 @@ Advantages:
 
 Basic operations: view, set, over
 
+> Optics decouple the operation to perform on element(s) of a data structure from the details of selecting the element(s) and the details of maintaining data structure invariants.
+> In other words, a selection algorithm and data structure invariant maintenance can be expressed as a composition of optics and used with many different operations.
+
 ---
 
 ## View
@@ -67,9 +70,11 @@ const person = {
   }
 }
 
-const workPhoneLens = R.compose(R.lensPath(['phone', 'work']))
+const workPhoneLens = R.lensPath(['phone', 'work'])
 
-R.view(workPhoneLens, person)
+// operation(optic,         data)
+R.view      (workPhoneLens, person)
+
 
 Output:
 {
@@ -83,8 +88,11 @@ Output:
 ## Set
 
 ```javascript
+// Composition of optics
 const workPhoneNumberLens = R.compose(workPhoneLens, R.lensProp('number'))
-R.set(workPhoneNumberLens, '123', person)
+
+// operation(optic,               ...  , data)
+R.set       (workPhoneNumberLens, '123', person)
 
 Output:
 {
@@ -110,7 +118,8 @@ const person = {
 }
 
 const ageLens = R.lensProp('age')
-R.over(ageLens, a => a + 1, person)
+// operation(optic,   ...       , data)
+R.over      (ageLens, a => a + 1, person)
 
 Output:
 {
@@ -127,8 +136,22 @@ https://github.com/calmm-js/documentation/blob/master/introduction-to-calmm.md
 
 * Used for decomposing the application state
 
-* What's the difference between partial lenses and lenses?
- * Optional values
+---
+
+## Partiality
+
+Why *partial*.lenses?
+
+Simply put:
+> Reading through the optic gives undefined and writing through the optic replaces the focus with the written value.
+
+Partial behavious means:
+* View is undefined if non-existent
+* View is undefined if type-mismatch
+* Setting to undefined removes element
+* Writing an empty object or array produces undefined
+* Setting can change type
+* Propagating removal
 
 ```haskell
 type Lens s a = (s -> a, a -> s -> s)
@@ -169,9 +192,20 @@ L.append, L.augument, L.chain, L.choose, L.choice, L.defaults ...
 
 ## Partial.lenses API
 
-* Operations and combinators listed separately in documentation
+Operations, "combinators", lenses, transforms and isomorphisms listed separately in documentation
 
-* Shorthands:
+Operations: L.get, L.set, L.modify, L.remove, L.removeAll, L.collect
+
+Optics: 
+  * Lenses: ['a', 'b'] (single focus)
+  * Traversals: ['a', 'b', L.elems] (multiple focuses)
+  * Isomorphisms (like lenses, but inversable)
+
+Combinators: L.compose, L.flat, L.lazy, L.query, L.ifElse, ...
+
+Transforms: L.transform, L.*Op
+
+Shorthands:
 
 ```javascript
 L.compose(a, b, ...) => [a, b, ...]
@@ -179,6 +213,13 @@ L.prop('...') => '...'
 ```
 
 Usage:
+
+```
+operation(optic,          ...,    data)             // result
+L.get    ('a',                    {a: 1})           // 1
+L.collect([L.elems, 'a'],         [{a: 1}, {a: 2}]) // [1, 2]
+L.modify ('a',            a => 2, {a: 1})           // {a: 2}
+```
 
 ```javascript
 const L = require('partial.lenses')
