@@ -330,9 +330,9 @@ L.modify([
 ], ({ examinationcode, ytlRegCode }) => R.assoc('arpaId', getExamArpaId(examinationcode, ytlRegCode)))
 ```
 
+https://github.com/digabi/registry/blob/176ab2226f2a80277220300a9ee14cb6c845784b/public/js/studentsearch.js#L1012
 ```javascript
 L.transformAsync with L.modifyOp
-https://github.com/digabi/registry/blob/176ab2226f2a80277220300a9ee14cb6c845784b/public/js/studentsearch.js#L1012
     const mergeHeldExams = L.transformAsync(
       L.flat(
         'studentExaminations',
