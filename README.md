@@ -264,6 +264,21 @@ const sumOfMaxScores = R.pipe(L.collect(maxScoreLens), R.sum)(data)
 ```javascript
 const anonymizer = anonymizedValues =>
   L.modifyOp((value, key) => (R.has(key, anonymizedValues) ? anonymizedValues[key] : value))
+  
+export const studentDetailsAnonymizer = ({
+  ssn = createRandomHetu(),
+  firstname = 'First Names',
+  lastname = 'Last',
+  schoolName = 'School',
+  schoolDetailsNameName = 'School',
+  schoolNumber = 1000,
+  studentNumber = '001',
+  fullname = `${lastname}, ${firstname}`
+} = {}) =>
+  L.transform([
+    L.leafs,
+    anonymizer({ ssn, firstname, lastname, fullname, schoolName, schoolDetailsNameName, schoolNumber, studentNumber })
+  ])
 ```
 
 L.modify L.query
