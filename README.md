@@ -261,6 +261,11 @@ const sumOfMaxScores = R.pipe(L.collect(maxScoreLens), R.sum)(data)
 
 # Examples
 
+```javascript
+const anonymizer = anonymizedValues =>
+  L.modifyOp((value, key) => (R.has(key, anonymizedValues) ? anonymizedValues[key] : value))
+```
+
 L.modify L.query
 https://github.com/digabi/registry/blob/f5887502d70503e83fd7143405cc41ea2db53986/server/util/setup-student.js#L842
 ```javascript
