@@ -279,6 +279,7 @@ export const studentDetailsAnonymizer = ({
     L.leafs,
     anonymizer({ ssn, firstname, lastname, fullname, schoolName, schoolDetailsNameName, schoolNumber, studentNumber })
   ])
+  const anonymized = studentDetailsAnonymizer()(studentDetails)
 ```
 
 L.modify L.query
