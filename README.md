@@ -303,6 +303,31 @@ export const withExamArpaIds = L.transform([
     return L.modifyOp(R.assoc('examArpaId', arpaId))
   })
 ])
+
+L.transform([
+  L.elems,
+  registrationsByExaminationLens,
+  L.elems,
+  'exams',
+  L.elems,
+  L.when(R.prop('isDigiExam')),
+  L.choose(({ examinationcode, ytlRegCode }) => [
+    'examArpaId',
+    () => {
+      const arpaId = getExamArpaId(examinationcode, ytlRegCode)
+      return L.setOp(arpaId)
+    }])
+  ])
+])
+
+L.modify([
+  L.elems,
+  registrationsByExaminationLens,
+  L.elems,
+  'exams',
+  L.elems,
+  L.when(R.prop('isDigiExam'))
+], ({ examinationcode, ytlRegCode }) => R.assoc('arpaId', getExamArpaId(examinationcode, ytlRegCode)))
 ```
 
 ```javascript
@@ -319,5 +344,4 @@ https://github.com/digabi/registry/blob/176ab2226f2a80277220300a9ee14cb6c845784b
         ])
       )
     )
-    
-
+```
