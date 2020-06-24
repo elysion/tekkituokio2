@@ -263,7 +263,40 @@ const sumOfMaxScores = R.pipe(L.collect(maxScoreLens), R.sum)(data)
 
 L.modify L.query
 https://github.com/digabi/registry/blob/f5887502d70503e83fd7143405cc41ea2db53986/server/util/setup-student.js#L842
+```javascript
+export const bumpExaminations = (student, count = 0) =>
+  L.modify(L.query(L.matches(/^\d{4}[K|S]$/)), examinationCode => bumpCode(examinationCode, count), student)
+```
 
+https://github.com/digabi/registry/blob/f5887502d70503e83fd7143405cc41ea2db53986/server/util/setup-student.js#L566
+```javascript
+export const withExamArpaIds = L.transform([
+  L.elems,
+  registrationsByExaminationLens,
+  L.elems,
+  'exams',
+  L.elems,
+  L.when(R.prop('isDigiExam')),
+  L.choose(({ examinationcode, ytlRegCode }) => {
+    const arpaId = getExamArpaId(examinationcode, ytlRegCode)
+    return L.modifyOp(R.assoc('examArpaId', arpaId))
+  })
+])
+```
+
+```javascript
 L.transformAsync with L.modifyOp
 https://github.com/digabi/registry/blob/176ab2226f2a80277220300a9ee14cb6c845784b/public/js/studentsearch.js#L1012
+    const mergeHeldExams = L.transformAsync(
+      L.flat(
+        'studentExaminations',
+        'registrationsByExamination',
+        'exams',
+        L.choose(({ ytlRegCode, examinationcode }) => [
+          'heldExams',
+          L.modifyOp(getHeldExams(studentUuid, ytlRegCode, examinationcode))
+        ])
+      )
+    )
+    
 
